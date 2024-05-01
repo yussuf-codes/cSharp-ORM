@@ -2,15 +2,16 @@
 using System.Collections.Generic;
 
 namespace ORM;
+
 public class ObjectRelationalMapper
 {
     private readonly string _connectionString;
-    
+
     public ObjectRelationalMapper(string connectionString)
     {
         _connectionString = connectionString;
     }
-    
+
     private string GetPrimaryKeyName(string table)
     {
         string primaryKeyName = "";
@@ -30,8 +31,8 @@ public class ObjectRelationalMapper
         }
         return primaryKeyName;
     }
-    
-    public Dictionary<long, Dictionary<string, object>> GetAllRows(string table, long limit = long.MaxValue)
+
+    public Dictionary<long, Dictionary<string, object>> List(string table, long limit = long.MaxValue)
     {
         Dictionary<long, Dictionary<string, object>> dataDictionary = new();
         SqlConnection sqlConnection = new(_connectionString);
@@ -65,8 +66,8 @@ public class ObjectRelationalMapper
         }
         return dataDictionary;
     }
-    
-    public Dictionary<string, object> GetRow(string table, long id)
+
+    public Dictionary<string, object> Get(string table, long id)
     {
         Dictionary<string, object> rowDictionary = new();
         SqlConnection sqlConnection = new(_connectionString);
